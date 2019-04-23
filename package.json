@@ -1,0 +1,22 @@
+{
+  "name": "github-repository-language-fetcher",
+  "version": "0.0.1",
+  "description": "A simple NodeJs app to query the GitHub API to retrieve a list of repositories for a user along with the language stats for each repository.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oliver4888/github-repository-language-fetcher.git"
+  },
+  "author": "Oliver Lutley",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/oliver4888/github-repository-language-fetcher/issues"
+  },
+  "homepage": "https://github.com/oliver4888/github-repository-language-fetcher#readme",
+  "dependencies": {
+    "request": "^2.88.0"
+  }
+}
