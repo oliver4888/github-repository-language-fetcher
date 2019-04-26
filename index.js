@@ -23,9 +23,13 @@ const options = url => {
   };
 };
 
+console.log(`Fetching repositories for ${GITHUB_USER}`);
+
 request(
   options(`https://api.github.com/users/${GITHUB_USER}/repos`),
   (_error, _response, body) => {
+    let repos = JSON.parse(body);
+    console.log(`Found ${repos.length} repositories.\n`);
     fetchLanguages(JSON.parse(body));
   }
 );
@@ -36,9 +40,9 @@ function fetchLanguages(repos) {
 }
 
 function fetchLanguage(repos, idx) {
-  console.log(`-${repos[idx].name} ${repos[idx].private ? "(private)" : ""}`);
+  console.log(`${idx + 1}: ${repos[idx].name} ${repos[idx].private ? " (private)" : ""}`);
   request(options(repos[idx].languages_url), (_error, _response, body) => {
-    console.log(body);
+    console.log(`  ${body}`);
     if (repos[idx].private) {
       // add up languages
     } else {
@@ -51,7 +55,7 @@ function fetchLanguage(repos, idx) {
     if (idx === repos.length - 1) {
       fetchLimits();
     } else {
-      fetchLanguage(repos, idx + 1);
+      fetchLanguage(repos, ++idx);
     }
   });
 }
