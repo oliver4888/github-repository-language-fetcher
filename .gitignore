@@ -1,5 +1,5 @@
-# Temp output file for logging json stuff
-test-output.json
+# Output file
+output.json
 
 # Build folder from pkg
 build/
