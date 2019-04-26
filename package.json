@@ -4,7 +4,8 @@
   "description": "A simple NodeJs app to query the GitHub API to retrieve a list of repositories for a user along with the language stats for each repository.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "pkg index.js --targets win --out-path build/"
   },
   "repository": {
     "type": "git",
@@ -17,6 +18,7 @@
   },
   "homepage": "https://github.com/oliver4888/github-repository-language-fetcher#readme",
   "dependencies": {
+    "pkg": "^4.3.7",
     "request": "^2.88.0"
   }
 }
