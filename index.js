@@ -26,26 +26,32 @@ const options = url => {
 request(
   options(`https://api.github.com/users/${GITHUB_USER}/repos`),
   (_error, _response, body) => {
-    fetchLanguages(JSON.parse(body), 0);
+    fetchLanguages(JSON.parse(body));
   }
 );
 
-function fetchLanguages(repos, idx) {
-  console.log(`Fetching languages for${repos[idx].private ? " private" : ""} repository: ${repos[idx].name}`);
+function fetchLanguages(repos) {
+  console.log("Fetching languages for:");
+  fetchLanguage(repos, 0);
+}
+
+function fetchLanguage(repos, idx) {
+  console.log(`-${repos[idx].name} ${repos[idx].private ? "(private)" : ""}`);
   request(options(repos[idx].languages_url), (_error, _response, body) => {
+    console.log(body);
     if (repos[idx].private) {
       // add up languages
     } else {
       output.repos.push({
         name: repos[idx].name,
-        languages: JSON.parse(body)
+        languages: (body = JSON.parse(body))
       });
     }
 
     if (idx === repos.length - 1) {
       fetchLimits();
     } else {
-      fetchLanguages(repos, idx + 1);
+      fetchLanguage(repos, idx + 1);
     }
   });
 }
