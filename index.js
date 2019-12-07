@@ -1,8 +1,22 @@
 const request = require("request");
 const fs = require("fs");
 
+var argv = require('minimist')(process.argv.slice(2));
+console.log(argv);
+let githubUser = argv.user;
+
+if (githubUser === undefined) {
+  console.log("You must specify a user!");
+  return;
+}
+
+let outputFileName = argv.output;
+
+if (outputFileName === undefined) {
+  outputFileName = "output.json";
+}
+
 const PRIVATE_REPOS = "_private-repos";
-const GITHUB_USER = "oliver4888";
 
 const output = {
   limits: null,
@@ -18,15 +32,15 @@ const options = url => {
     url: url,
     headers: {
       Accept: "application/vnd.github.v3+json",
-      "User-Agent": "Oliver4888"
+      "User-Agent": githubUser
     }
   };
 };
 
-console.log(`Fetching repositories for ${GITHUB_USER}`);
+console.log(`Fetching repositories for ${githubUser}`);
 
 request(
-  options(`https://api.github.com/users/${GITHUB_USER}/repos`),
+  options(`https://api.github.com/users/${githubUser}/repos`),
   (_error, _response, body) => {
     let repos = JSON.parse(body);
     console.log(`Found ${repos.length} repositories.\n`);
@@ -71,5 +85,5 @@ function fetchLimits() {
 }
 
 function outputToJson() {
-  fs.writeFile("output.json", JSON.stringify(output), () => {});
+  fs.writeFile(outputFileName, JSON.stringify(output), () => {});
 }
