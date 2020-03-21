@@ -19,7 +19,7 @@
   },
   "homepage": "https://github.com/oliver4888/github-repository-language-fetcher#readme",
   "dependencies": {
-    "pkg": "^4.3.7",
-    "request": "^2.88.0"
+    "pkg": "^4.4.4",
+    "request": "^2.88.2"
   }
 }
